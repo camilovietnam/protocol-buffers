@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message Person {
+    int32 age = 1;
+    string first_name = 2;
+    string last_name = 3;
+
+    enum EyeColor {
+        NO_COLOR = 0;
+        GREEN = 1;
+        BLUE = 2;
+        BLACK = 3;
+        BROWN = 4;
+    }
+
+    EyeColor myEye = 4;
+}

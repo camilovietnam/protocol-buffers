@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message Person {
+    string first_name = 1;
+    string last_name = 2;
+    
+    message Address {
+        string city = 1;
+        string country = 2;
+        string street_name = 3;
+    }
+
+    repeated Address old_addresses = 3;
+}

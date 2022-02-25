@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// We can include multiple messages
+message BankInformation {
+    string account_number = 1;
+    string currency = 2;
+    int32 balance = 3;
+}
+
+message Customer {
+    string first_name = 1;
+    string last_name = 2;
+    BankInformation bank_information = 3;
+}
+

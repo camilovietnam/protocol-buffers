@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+// Create the following messages: 
+
+message Date {
+    uint32 year=1;
+    uint32 momth=2;
+    uint32 day=3;
+}
+
+message LatitudeLongitude {
+    int32 latitude=1;
+    int32 longitude=2;
+}
+
+message Money {
+    string currencyCode=1;
+    uint32 integralAmount=2;
+    uint32 decimalAmount=3;
+}
+
+enum DayOfWeek {
+    UNDEFINED = 0;
+    MONDAY = 1;
+    TUESDAY = 2;
+    WEDNESDAY = 3;
+    THURSDAY = 4;
+    FRIDAY = 5;
+    SATURDAY = 6;
+    SUNDAY = 7;
+}
+
+message Person {
+    string firstName = 1;
+    repeated string middleNames = 2;
+    string lastName = 3;
+}

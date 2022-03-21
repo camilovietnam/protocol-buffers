@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"greet/greetpb"
+	"io"
 	"log"
 
 	"google.golang.org/grpc"
@@ -19,7 +20,8 @@ func main() {
 	}()
 
 	cli := greetpb.NewGreetServiceClient(con)
-	greet(cli)
+	// greet(cli)
+	greetManyTimes(cli)
 }
 
 func greet(cli greetpb.GreetServiceClient) {
@@ -35,4 +37,34 @@ func greet(cli greetpb.GreetServiceClient) {
 	}
 
 	fmt.Printf("[>] %s\n", res.GetResult())
+}
+
+func greetManyTimes(cli greetpb.GreetServiceClient) {
+	var (
+		stream greetpb.GreetService_GreetManyTimesClient
+		req    = &greetpb.GreetManyTimesRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Hector",
+				LastName:  "Lavoe",
+			},
+		}
+	)
+	stream, err := cli.GreetManyTimes(context.Background(), req)
+	if err != nil {
+		log.Fatalf("[x] greetManyTimes: %#v", err)
+	}
+
+	for {
+		res, err := stream.Recv()
+		if err == io.EOF {
+			fmt.Printf("[<] close stream")
+			return
+		}
+		if err != nil {
+			log.Fatalf("[x] recv: %#v", err)
+		}
+
+		fmt.Printf("[>] %s\n", res.GetResult())
+	}
+
 }

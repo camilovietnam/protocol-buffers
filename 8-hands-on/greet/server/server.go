@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"greet/greetpb"
 	"log"
@@ -25,6 +26,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("serve: %v", err)
 	}
+}
 
-	fmt.Println("Server is listening in port: 50051")
+func (s *server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+	fmt.Printf("[i] call Greet(): %v", req)
+	g := req.GetGreeting()
+	return &greetpb.GreetResponse{
+		Result: fmt.Sprintf("Buenos dias, %s %s", g.GetFirstName(), g.GetLastName()),
+	}, nil
 }

@@ -44,7 +44,7 @@ func main() {
 		res, err := stream.Recv()
 
 		if err == io.EOF {
-			log.Print("[!] end of stream")
+			log.Print("[^] end of stream")
 			return
 		}
 

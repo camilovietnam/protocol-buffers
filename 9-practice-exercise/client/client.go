@@ -18,6 +18,10 @@ func main() {
 		ctx = context.Background()
 	)
 
+	if len(os.Args) < 2 {
+		log.Fatalf("[!] Please give me a number as the argument!")
+	}
+
 	con, err := grpc.Dial("0.0.0.0:51234", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("[x] dial: %v", err)

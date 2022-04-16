@@ -35,18 +35,18 @@ func main() {
 func (s *server) Decompose(req *primepb.DecomposeRequest, stream primepb.PrimeService_DecomposeServer) error {
 	log.Printf("[!] decompose request: %d", req.GetNumber())
 	num := req.GetNumber()
-	var factor int64 = 2
+	var divisor int64 = 2
 
 	for num > 1 {
-		if num%factor == 0 {
+		if num%divisor == 0 {
 			if err := stream.Send(&primepb.DecomposeResponse{
-				Factor: factor,
+				Factor: divisor,
 			}); err != nil {
 				return err
 			}
-			num /= factor
+			num /= divisor
 		} else {
-			factor++
+			divisor++
 		}
 	}
 

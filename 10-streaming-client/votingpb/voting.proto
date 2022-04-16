@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package="/votingpb";
+
+package votingpb;
+
+message VoteRequest {
+  uint32 option = 1;
+}
+
+message VoteResponse {
+  uint32 winner = 1;
+}
+
+service VotingService {
+  rpc Vote(stream VoteRequest) returns (VoteResponse){};
+}

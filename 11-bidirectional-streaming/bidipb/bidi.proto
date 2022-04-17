@@ -1,0 +1,15 @@
+syntax="proto3";
+option go_package="/bidipb";
+package bidipb;
+
+message GreetEveryoneRequest {
+   string username = 1;
+}
+
+message GreetEveryoneResponse {
+  string result = 1;
+}
+
+service GreetService {
+  rpc GreetEveryone(stream GreetEveryoneRequest) returns (stream GreetEveryoneResponse){};
+}
